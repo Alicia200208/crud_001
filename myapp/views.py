@@ -1,42 +1,36 @@
-from django.shortcuts import render,redirect
-from.models import User
-from.forms import UserForm
+from django.shortcuts import render, redirect, get_object_or_404
+from .models import User
+from .forms import UserForm
 # Create your views here.
 
 def user_list(request):
-    records=User.objects.all()
-    mydict={'records':records}
-    return render(request,'listingpage.html',context=mydict)
+    records = User.objects.all()
+    return render(request, 'listingpage.html', {'records': records})
 
 def AddUser(request):
-    mydict={}
-    form=UserForm(request.POST or None ,request.FILES or None)
+    form = UserForm(request.POST or None, request.FILES or None)
     if form.is_valid():
         form.save()
-        return redirect('/')
-    
-    mydict['form']=form
-    return render(request,'add.html', mydict)
+        return redirect('user_list')
 
-def EditUser(request,id=None):
-    one_rec=User.objects.get(pk=id)
-    form=UserForm(request.POST or None ,request.FILES or None,instance=one_rec)
+    return render(request, 'add.html', {'form': form})
+
+def EditUser(request, id=None):
+    one_rec = get_object_or_404(User, pk=id)
+    form = UserForm(request.POST or None, request.FILES or None, instance=one_rec)
     if form.is_valid():
         form.save()
-        return redirect('/')
-    
-    mydict= {'form':form}
-    return render(request,'edit.html',context=mydict)
+        return redirect('user_list')
 
-def DeleteUser(request,eid=None):
-    one_rec = User.objects.get(pk=eid)
-    if  request.method=="POST":
-         one_rec.delete()
-         return redirect('/')
-    return render(request,'delete.html')
+    return render(request, 'edit.html', {'form': form})
 
-def ViewUser(request,eid=None):
-    mydict={}
-    one_rec = User.objects.get(pk=eid)
-    mydict['user']=one_rec
-    return render(request,'view.html',mydict)
+def DeleteUser(request, eid=None):
+    one_rec = get_object_or_404(User, pk=eid)
+    if request.method == "POST":
+        one_rec.delete()
+        return redirect('user_list')
+    return render(request, 'delete.html', {'user': one_rec})
+
+def ViewUser(request, eid=None):
+    one_rec = get_object_or_404(User, pk=eid)
+    return render(request, 'view.html', {'user': one_rec})

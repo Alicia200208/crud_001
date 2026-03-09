@@ -6,7 +6,7 @@ class UserForm(forms.ModelForm):
         model=User
         fields='__all__'
 
-    def __init__(self,*args,**kwargs):
-        super(UserForm,self).__init__(*args, **kwargs)
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         for visible in self.visible_fields():
-            visible.field.widget.attrs['class']='form-control'    
+            visible.field.widget.attrs['class'] = 'form-control'    

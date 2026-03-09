@@ -1,0 +1,56 @@
+/* Custom plum and purple theme overrides */
+
+body {
+    background-color: plum;
+    color: purple;
+}
+
+/* Override bootstrap backgrounds */
+.bg-light {
+    background-color: plum !important;
+}
+
+.bg-info {
+    background-color: purple !important;
+    color: white !important;
+}
+
+/* Buttons */
+.btn-primary {
+    background-color: purple !important;
+    border-color: purple !important;
+    color: white !important;
+}
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active {
+    background-color: plum !important;
+    border-color: plum !important;
+    color: purple !important;
+}
+
+/* Table header row */
+.table thead th,
+.bg-info.table {
+    background-color: purple !important;
+    color: white !important;
+}
+
+/* Additional adjustments */
+.btn-success {
+    background-color: purple !important;
+    border-color: purple !important;
+}
+.btn-danger {
+    background-color: plum !important;
+    border-color: plum !important;
+    color: purple !important;
+}
+
+/* Ensure links are purple */
+a {
+    color: purple !important;
+}
+a:hover {
+    color: plum !important;
+}
